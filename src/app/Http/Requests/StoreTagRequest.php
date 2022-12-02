@@ -28,7 +28,7 @@ class StoreTagRequest extends FormRequest
             'title' => 'required|string',
             'meta_title' => 'required|string|unique:tags',
             'slug' => 'nullable|string',
-            'content' => 'required|string',
+            'context' => 'required|string',
         ];
     }
 
@@ -49,6 +49,6 @@ class StoreTagRequest extends FormRequest
 
     public function getContext()
     {
-        return $this->validated()['content'];
+        return $this->validated()['context'];
     }
 }

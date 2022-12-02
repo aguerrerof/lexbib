@@ -23,6 +23,10 @@ Route::get('/', function () {
 
 Route::prefix('admin')
     ->group(function () {
+        Route::get('', function () {
+            return redirect('/login');
+        })->middleware(Authenticate::class);
+
         Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')
             ->middleware(Authenticate::class);
 
@@ -37,7 +41,12 @@ Route::prefix('admin')
             Route::get('new', [TagsController::class, 'create'])->name('tags.create')->middleware(Authenticate::class);
             Route::post('save', [TagsController::class, 'store'])->name('tags.save')->middleware
             (Authenticate::class);
-
+            Route::get('{id}/edit', [TagsController::class, 'edit'])->name('tags.edit')->middleware
+            (Authenticate::class);
+            Route::post('{id}/update', [TagsController::class, 'update'])->name('tags.update')->middleware
+            (Authenticate::class);
+            Route::get('{id}/delete', [TagsController::class, 'destroy'])->name('tags.delete')->middleware
+            (Authenticate::class);
         });
     });
 

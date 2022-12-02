@@ -70,13 +70,14 @@ class TagsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param Tag $tag
+     * @param int $id
      *
-     * @return Response
+     * @return Application|Factory|View|Response
      */
-    public function edit(Tag $tag)
+    public function edit(int $id)
     {
-        //
+        $tag = Tag::findOrFail($id);
+        return view('tags.edit', ['tag' => $tag]);
     }
 
     /**
@@ -85,22 +86,32 @@ class TagsController extends Controller
      * @param UpdateTagRequest $request
      * @param Tag $tag
      *
-     * @return Response
+     * @return RedirectResponse
      */
-    public function update(UpdateTagRequest $request, Tag $tag)
+    public function update(int $id, UpdateTagRequest $request)
     {
-        //
+        $tag = Tag::findOrFail($id);
+        $tag->update([
+            'title' => $request->getTitle(),
+            'meta_title' => $request->getMetaTitle(),
+            'slug' => $request->getSlug() ?? '',
+            'context' => $request->getContext(),
+        ]);
+        return redirect()->route('tags.index');
+
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param Tag $tag
+     * @param int $id
      *
-     * @return Response
+     * @return RedirectResponse
      */
-    public function destroy(Tag $tag)
+    public function destroy(int $id): RedirectResponse
     {
-        //
+        $tag = Tag::findOrFail($id);
+        $tag->delete();
+        return redirect()->route('tags.index');
     }
 }

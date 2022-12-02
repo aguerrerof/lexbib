@@ -22,19 +22,21 @@
         @endif
         <hr class="hr"/>
         <div class="row">
-            <form id="" method="POST" action="{{route('tags.save')}}">
+            <form id="" method="POST" action="{{route('tags.update',$tag->id)}}">
                 @csrf
                 <div class="row mt-2">
                     <div class="col-6">
                         <div class="form-group mb-0">
                             <label for="title">Título</label>
-                            <input id="title" type="text" class="form-control" name="title" required>
+                            <input id="title" type="text" class="form-control" name="title" required
+                                   value="{{ old('title',$tag->title) }}">
                         </div>
                     </div>
                     <div class="col-6">
                         <div class="form-group mb-0">
                             <label for="meta_title">Meta Título</label>
-                            <input id="meta_title" type="text" class="form-control" name="meta_title" required>
+                            <input id="meta_title" type="text" class="form-control" name="meta_title" required
+                                   value="{{ old('meta_title',$tag->meta_title) }}">
                         </div>
                     </div>
                 </div>
@@ -43,7 +45,8 @@
                     <div class="col-6">
                         <div class="form-group mb-0">
                             <label for="slug">Slug</label>
-                            <input id="slug" type="text" class="form-control" name="slug">
+                            <input id="slug" type="text" class="form-control" name="slug" value="{{ old
+                            ('slug',$tag->slug) }}">
                         </div>
                     </div>
                 </div>
@@ -51,7 +54,8 @@
                     <div class="col-12">
                         <div class="form-group mb-0">
                             <label for="content">Contenido</label>
-                            <textarea name="context" id="" cols="30" rows="10" class="form-control" required></textarea>
+                            <textarea name="context" id="" cols="30" rows="10" class="form-control" required>{{ old
+                            ('context',$tag->context) }}</textarea>
                         </div>
                     </div>
                 </div>

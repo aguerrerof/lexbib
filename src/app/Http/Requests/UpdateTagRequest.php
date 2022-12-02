@@ -13,7 +13,7 @@ class UpdateTagRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,10 +21,38 @@ class UpdateTagRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array
+     */
+    public function rules(): array
     {
         return [
-            //
+            'title' => 'required|string',
+            'meta_title' => 'required|string|unique:tags,meta_title,'.$this->route('id'),
+            'slug' => 'nullable|string',
+            'context' => 'required|string',
         ];
+    }
+
+    public function getTitle()
+    {
+        return $this->validated()['title'];
+    }
+
+    public function getMetaTitle()
+    {
+        return $this->validated()['meta_title'];
+    }
+
+    public function getSlug()
+    {
+        return $this->validated()['slug'];
+    }
+
+    public function getContext()
+    {
+        return $this->validated()['context'];
     }
 }
