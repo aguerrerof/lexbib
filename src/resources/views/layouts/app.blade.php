@@ -105,12 +105,12 @@
 
 </main>
 <!-- ======= Footer ======= -->
-<footer id="footer" class="footer">
+<footer id="footer fixed-bottom" class="footer">
     <div class="copyright">
         &copy; Copyright <strong><span>Alexander</span></strong>. All Rights Reserved
     </div>
     <div class="credits">
-        Designed by <a href="https://lanistek.com">Lanistek</a>
+        Created by <a href="https://lanistek.com" target="_blank">Lanistek</a>
     </div>
 </footer><!-- End Footer -->
 
