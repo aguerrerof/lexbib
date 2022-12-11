@@ -25,8 +25,4 @@ Route::prefix('admin')
         Route::prefix('tags')->group(function () {
             Route::get('/search', [TagsController::class, 'search']);
         });
-
-        Route::prefix('posts')->group(function () {
-            //Route::post('save', [PostsController::class, 'store'])->middleware(Authenticate::class);
-        });
     });
