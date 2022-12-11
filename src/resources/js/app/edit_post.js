@@ -1,17 +1,9 @@
-window.jQuery = window.$ = require('jquery');
-require('select2');
-import "select2/dist/css/select2.css";
 
-$("#select_tags").select2({
+$("#select_tags_update").select2({
     tags: true,
     multiple: true,
     tokenSeparators: [',', ' '],
     minimumInputLength: 2,
-    minimumResultsForSearch: 10,
-    templateSelection: function (data, container) {
-        $(data.element).attr('id-db', data.id);
-        return data.text;
-    },
     ajax: {
         url: '/api/admin/tags/search',
         dataType: "json",

@@ -54,6 +54,12 @@ Route::prefix('admin')
             Route::get('', [PostsController::class, 'index'])->name('posts.index')->middleware(Authenticate::class);
             Route::get('new', [PostsController::class, 'create'])->name('posts.new')->middleware(Authenticate::class);
             Route::post('save', [PostsController::class, 'store'])->name('posts.save')->middleware(Authenticate::class);
+            Route::get('{id}/edit', [PostsController::class, 'edit'])->name('posts.edit')->middleware
+            (Authenticate::class);
+            Route::post('{id}/update', [PostsController::class, 'update'])->name('posts.update')->middleware
+            (Authenticate::class);
+            Route::get('{id}/delete', [PostsController::class, 'destroy'])->name('posts.delete')->middleware
+            (Authenticate::class);
         });
     });
 

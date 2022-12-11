@@ -24,7 +24,8 @@
                         <th>Id</th>
                         <th scope="col">Título</th>
                         <th scope="col">Descripci&oacute;n</th>
-                        <th scope="col">Link del video</th>
+                        <th scope="col">Fecha de creación</th>
+                        <th scope="col">Estado</th>
                         <th scope="col"></th>
                         <th scope="col"></th>
                     </tr>
@@ -35,25 +36,30 @@
                             <th>{{$post->id}}</th>
                             <th scope="row">{{$post->title}}</th>
                             <th>{{substr($post->description,0,100)}}</th>
+                            <th>{{$post->created_at}}</th>
+                            <th>{{$post->deleted_at ? 'Inactivo':'Activo'}}</th>
                             <th>
-                                <a href="{{$post->link}}" target="_blank" class="link-info">
-                                    <i class="fa fa-edit"></i>&nbsp;Ver
-                                </a>
-                            </th>
-                            <th>
-                                <a href="{{ route("tags.edit", ['id' => $post->id] )}}" class="btn
+                                <a href="{{ route("posts.edit", ['id' => $post->id] )}}" class="btn
                                 btn-outline-primary" role="button"
                                    aria-disabled="true">
                                     <i class="fa fa-edit"></i>&nbsp;Editar
                                 </a>
                             </th>
                             <th>
-                                <a href="{{ route("tags.delete", ['id' => $post->id] )}}" class=".delete_tag btn
+                                @if($post->deleted_at)
+                                    <a href="{{ route("posts.delete", ['id' => $post->id] )}}" class=".delete_tag btn
+                                btn-outline-danger disabled">
+                                        <i class="fa fa-trash"></i>&nbsp;Eliminar
+                                    </a>
+                                @else
+                                    <a href="{{ route("posts.delete", ['id' => $post->id] )}}" class=".delete_tag btn
                                 btn-outline-danger" role="button" onclick="return confirm('¿Estás seguro de borrar ' +
                                  'este post?')"
-                                   aria-disabled="true">
-                                    <i class="fa fa-trash"></i>&nbsp;Eliminar
-                                </a>
+                                       aria-disabled="true">
+                                        <i class="fa fa-trash"></i>&nbsp;Eliminar
+                                    </a>
+                                @endif
+
                             </th>
                         </tr>
                     @endforeach

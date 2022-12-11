@@ -94,7 +94,7 @@
                 <a class="nav-link" href="{{ route('logout') }}"
                    onclick="event.preventDefault();
                                                    document.getElementById('logout-form').submit()">
-                    <i class="ri ri-logout-box-line"></i> {{ __('Logout') }}
+                    <i class="ri ri-logout-box-line"></i> {{ __('Cerrar sesión') }}
                 </a>
 
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">

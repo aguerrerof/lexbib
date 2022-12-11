@@ -4,3 +4,4 @@ window.Swal = Swal;
 require('./app/tags.js');
 require('./app/posts.js');
 require('./app/new_post.js');
+require('./app/edit_post.js');

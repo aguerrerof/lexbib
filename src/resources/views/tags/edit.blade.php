@@ -70,9 +70,4 @@
             </form>
         </div>
     </div>
-    <script>
-        $(function () {
-            $('.table').DataTable();
-        });
-    </script>
 @endsection

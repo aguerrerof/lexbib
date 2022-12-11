@@ -11,9 +11,9 @@ class UpdatePostRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,10 +21,33 @@ class UpdatePostRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return [
-            //
+            'title' => 'required|string',
+            'description' => 'required|string',
+            'link' => 'required|url',
+            'tags'=>'required|array'
         ];
+    }
+
+    public function getTitle()
+    {
+        return $this->validated()['title'];
+    }
+
+    public function getDescription()
+    {
+        return $this->validated()['description'];
+    }
+
+    public function getLink()
+    {
+        return $this->validated()['link'];
+    }
+
+    public function getTags()
+    {
+        return $this->validated()['tags'];
     }
 }

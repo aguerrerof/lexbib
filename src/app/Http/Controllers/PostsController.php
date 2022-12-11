@@ -25,7 +25,9 @@ class PostsController extends Controller
      */
     public function index()
     {
-        $posts = Post::where(['user_id' => Auth::id()])->get();
+        $posts = Post::where(['user_id' => Auth::id()])
+            ->withTrashed()
+            ->get();
         return view('posts.list', [
             'posts' => $posts
         ]);
@@ -86,32 +88,47 @@ class PostsController extends Controller
      */
     public function edit(int $id)
     {
-        $post = Post::findOrFail($id);
-        return view('posts.edit', ['post' => $post]);
+        $post = Post::withTrashed()->with(['tags'])->findOrFail($id);
+        return view('posts.edit', ['post' => $post,'tags'=>$post->tags()->get()]);
     }
 
     /**
      * Update the specified resource in storage.
      *
+     * @param int $id
      * @param UpdatePostRequest $request
-     * @param Post $post
      *
-     * @return Response
+     * @return RedirectResponse
      */
-    public function update(UpdatePostRequest $request, Post $post)
+    public function update(int $id,UpdatePostRequest $request)
     {
-        //
+        $post = Post::withTrashed()->findOrFail($id);
+        $post->update([
+            'title' => $request->getTitle(),
+            'description' => $request->getDescription(),
+            'link' => $request->getLink(),
+            'deleted_at'=>null
+        ]);
+
+        PostTag::updateTagsByPost(
+            $post,
+            $request->getTags()
+        );
+
+        return redirect()->route('posts.index');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param Post $post
+     * @param int $id
      *
-     * @return Response
+     * @return RedirectResponse
      */
-    public function destroy(Post $post)
+    public function destroy(int $id)
     {
-        //
+        $tag = Post::findOrFail($id);
+        $tag->delete();
+        return redirect()->route('posts.index');
     }
 }
