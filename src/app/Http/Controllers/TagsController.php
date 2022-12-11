@@ -8,8 +8,10 @@ use App\Http\Requests\UpdateTagRequest;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
+use Symfony\Component\HttpFoundation\Request;
 
 class TagsController extends Controller
 {
@@ -58,13 +60,20 @@ class TagsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param Tag $tag
+     * @param string $term
      *
-     * @return Response
+     * @return JsonResponse
      */
-    public function show(Tag $tag)
+    public function search(Request $request): JsonResponse
     {
-        //
+        $term = $request->query->get('term');
+        $response  = Tag::query()
+            ->where('title', 'LIKE', "%{$term}%")
+            ->get();
+        return response()->json([
+            'total'=>$response->count(),
+            'results'=>$response
+        ]);
     }
 
     /**

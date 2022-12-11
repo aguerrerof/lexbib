@@ -61,7 +61,9 @@
 
                 <li class="nav-item dropdown pe-3">
 
-                    <span class="d-none d-md-block ps-2"> Usuario:&nbsp;{{ ucwords(Auth::user()->name) }}</span>
+                    <span class="d-none d-md-block ps-2">
+                        <i class="ri ri-user-2-fill"></i> Usuario:&nbsp;{{ ucwords(Auth::user()->name) }}
+                    </span>
                 </li><!-- End Profile Nav -->
 
             </ul>
@@ -83,10 +85,16 @@
             </li>
 
             <li class="nav-item">
+                <a class="nav-link" href="{{ route("posts.index") }}">
+                    <i class="bi bi-file-earmark-post"></i>
+                    <span>Posts</span>
+                </a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" href="{{ route('logout') }}"
                    onclick="event.preventDefault();
                                                    document.getElementById('logout-form').submit()">
-                    <i class="bi bi-door-closed"></i> {{ __('Logout') }}
+                    <i class="ri ri-logout-box-line"></i> {{ __('Logout') }}
                 </a>
 
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">

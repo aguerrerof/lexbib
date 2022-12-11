@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
-                <a href="{{ route("tags.index") }}" class="btn btn-outline-secondary" role="button"
+                <a href="{{ route("posts.index") }}" class="btn btn-outline-secondary" role="button"
                    aria-disabled="true">
                     <i class="bx bx-rotate-left"></i>&nbsp;Regresar
                 </a>
@@ -22,7 +22,7 @@
         @endif
         <hr class="hr"/>
         <div class="row">
-            <form id="" method="POST" action="{{route('tags.save')}}">
+            <form id="new_post_form" method="POST" action="{{route('posts.save')}}">
                 @csrf
                 <div class="row mt-2">
                     <div class="col-6">
@@ -33,29 +33,28 @@
                     </div>
                     <div class="col-6">
                         <div class="form-group mb-0">
-                            <label for="meta_title">Meta Título</label>
-                            <input id="meta_title" type="text" class="form-control" name="meta_title" required>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row mt-2">
-                    <div class="col-6">
-                        <div class="form-group mb-0">
-                            <label for="slug">Slug</label>
-                            <input id="slug" type="text" class="form-control" name="slug">
+                            <label for="link">Link del video</label>
+                            <input id="link" type="url" class="form-control" name="link" required>
                         </div>
                     </div>
                 </div>
                 <div class="row mt-2">
                     <div class="col-12">
                         <div class="form-group mb-0">
-                            <label for="content">Contenido</label>
-                            <textarea name="context" id="" cols="30" rows="10" class="form-control" required></textarea>
+                            <label for="description">Contenido</label>
+                            <textarea name="description" id="description" cols="30" rows="10" class="form-control"
+                                                            required></textarea>
                         </div>
                     </div>
                 </div>
-                <br>
+                <hr class="hr"/>
+                <div class="col-12">
+                    <div class="form-group mb-0">
+                        <label for="select_tags">Tags</label>
+                        <select class="js-data-example-ajax form-control"  id="select_tags" name="tags[]"
+                                required></select>
+                </div>
+                <hr class="hr"/>
                 <div class="row form-group mb-0">
                     <div class="col-lg-3">
                         <button type="submit" class="btn btn-primary"><i class="bx bxs-save"></i></i>&nbsp;&nbsp;
@@ -66,9 +65,4 @@
             </form>
         </div>
     </div>
-    <script>
-        $(function () {
-            $('.table').DataTable();
-        });
-    </script>
 @endsection

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PostsController;
 use App\Http\Controllers\TagsController;
 use Illuminate\Auth\Middleware\Authenticate;
 use Illuminate\Support\Facades\Auth;
@@ -31,7 +32,7 @@ Route::prefix('admin')
             ->middleware(Authenticate::class);
 
         Auth::routes([
-            'register' => false,
+            'register' => true,
             'reset' => true,
             'verify' => true,
         ]);
@@ -47,6 +48,12 @@ Route::prefix('admin')
             (Authenticate::class);
             Route::get('{id}/delete', [TagsController::class, 'destroy'])->name('tags.delete')->middleware
             (Authenticate::class);
+        });
+
+        Route::prefix('posts')->group(function () {
+            Route::get('', [PostsController::class, 'index'])->name('posts.index')->middleware(Authenticate::class);
+            Route::get('new', [PostsController::class, 'create'])->name('posts.new')->middleware(Authenticate::class);
+            Route::post('save', [PostsController::class, 'store'])->name('posts.save')->middleware(Authenticate::class);
         });
     });
 
