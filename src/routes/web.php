@@ -19,7 +19,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('landing');
+
+Route::get('/404', function () {
+    return view('not_found');
+})->name('not-found');
 
 
 Route::prefix('admin')
