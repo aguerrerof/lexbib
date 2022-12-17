@@ -53,10 +53,10 @@
                 <div class="col-12">
                     <div class="form-group mb-0">
                         <label for="select_tags">Tags</label>
-                        <select class="js-data-example-ajax form-control" id="select_tags_update" name="tags[]"
+                        <select class="form-control multi-select-search" id="select_tags_update" name="tags[]"
                                 required>
                             @foreach($tags as $tag)
-                                <option data-id-db="{{$tag->id}}" value="{{$tag->id}}">{{$tag->title}}</option>
+                                <option value="{{$tag->id}}">{{$tag->title}}</option>
                             @endforeach
 
                         </select>
