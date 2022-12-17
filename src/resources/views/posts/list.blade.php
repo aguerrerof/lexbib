@@ -28,6 +28,7 @@
                         <th scope="col">Estado</th>
                         <th scope="col"></th>
                         <th scope="col"></th>
+                        <th scope="col"></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -38,11 +39,16 @@
                             <th>{{substr($post->description,0,100)}}</th>
                             <th>{{$post->created_at}}</th>
                             <th>{{$post->deleted_at ? 'Inactivo':'Activo'}}</th>
+                            <th> <a href="{{ route("posts.show", ['uuid' => $post->uuid] )}}" class="btn
+                                btn-outline-primary" role="button"
+                                    aria-disabled="true">
+                                    <i class="bx bxs-show"></i>&nbsp;Ver
+                                </a></th>
                             <th>
                                 <a href="{{ route("posts.edit", ['id' => $post->id] )}}" class="btn
                                 btn-outline-primary" role="button"
                                    aria-disabled="true">
-                                    <i class="fa fa-edit"></i>&nbsp;Editar
+                                    <i class="bx bxs-edit"></i>&nbsp;Editar
                                 </a>
                             </th>
                             <th>
@@ -56,7 +62,7 @@
                                 btn-outline-danger" role="button" onclick="return confirm('¿Estás seguro de borrar ' +
                                  'este post?')"
                                        aria-disabled="true">
-                                        <i class="fa fa-trash"></i>&nbsp;Eliminar
+                                        <i class="bx bxs-trash"></i>&nbsp;Eliminar
                                     </a>
                                 @endif
 

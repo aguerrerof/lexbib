@@ -2,7 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
+use App\Models\Tag;
+use App\Models\User;
+use Carbon\Carbon;
+use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -19,10 +25,24 @@ class HomeController extends Controller
     /**
      * Show the application dashboard.
      *
-     * @return \Illuminate\Contracts\Support\Renderable
+     * @return Renderable
      */
-    public function index()
+    public function index(): Renderable
     {
-        return view('home');
+        $totalTags = Tag::all()->count();
+        $totalPosts = Post::all()->count();
+        $totalCurrentUsers = User::all()->count();
+        $postsCreatedToday = Post::select()
+            ->limit(5)
+            ->get();
+
+        return view(
+            'home',
+            [
+                'totalTags' => $totalTags,
+                'totalPosts' => $totalPosts,
+                'totalCurrentUsers' => $totalCurrentUsers,
+                'postsCreatedToday' => $postsCreatedToday,
+            ]);
     }
 }

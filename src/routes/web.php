@@ -28,7 +28,7 @@ Route::prefix('admin')
             return redirect('/login');
         })->middleware(Authenticate::class);
 
-        Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')
+        Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard')
             ->middleware(Authenticate::class);
 
         Auth::routes([
@@ -60,6 +60,8 @@ Route::prefix('admin')
             (Authenticate::class);
             Route::get('{id}/delete', [PostsController::class, 'destroy'])->name('posts.delete')->middleware
             (Authenticate::class);
+            Route::get('{uuid}/show', [PostsController::class, 'show'])->name('posts.show');
+
         });
     });
 

@@ -53,7 +53,7 @@ class PostsController extends Controller
     public function store(StorePostRequest $request): RedirectResponse
     {
         $post = Post::create([
-            'uuid'=>Str::uuid(),
+            'uuid' => Str::uuid(),
             'title' => $request->getTitle(),
             'description' => $request->getDescription(),
             'link' => $request->getLink(),
@@ -70,13 +70,14 @@ class PostsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param Post $post
+     * @param string $uuid
      *
      * @return Response
      */
-    public function show(Post $post)
+    public function show(string $uuid)
     {
-        //
+        $post = Post::with(['tags'])->where(['uuid' => $uuid])->firstOrFail();
+        dd($post);
     }
 
     /**
@@ -89,7 +90,7 @@ class PostsController extends Controller
     public function edit(int $id)
     {
         $post = Post::withTrashed()->with(['tags'])->findOrFail($id);
-        return view('posts.edit', ['post' => $post,'tags'=>$post->tags()->get()]);
+        return view('posts.edit', ['post' => $post, 'tags' => $post->tags()->get()]);
     }
 
     /**
@@ -100,14 +101,14 @@ class PostsController extends Controller
      *
      * @return RedirectResponse
      */
-    public function update(int $id,UpdatePostRequest $request)
+    public function update(int $id, UpdatePostRequest $request)
     {
         $post = Post::withTrashed()->findOrFail($id);
         $post->update([
             'title' => $request->getTitle(),
             'description' => $request->getDescription(),
             'link' => $request->getLink(),
-            'deleted_at'=>null
+            'deleted_at' => null
         ]);
 
         PostTag::updateTagsByPost(
