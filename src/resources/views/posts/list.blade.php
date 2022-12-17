@@ -39,7 +39,7 @@
                             <th>{{substr($post->description,0,100)}}</th>
                             <th>{{$post->created_at}}</th>
                             <th>{{$post->deleted_at ? 'Inactivo':'Activo'}}</th>
-                            <th> <a href="{{ route("posts.show", ['uuid' => $post->uuid] )}}" class="btn
+                            <th> <a href="{{ route("posts.show", ['uuid' => $post->uuid] )}}"  target="_blank" class="btn
                                 btn-outline-primary" role="button"
                                     aria-disabled="true">
                                     <i class="bx bxs-show"></i>&nbsp;Ver

@@ -72,12 +72,15 @@ class PostsController extends Controller
      *
      * @param string $uuid
      *
-     * @return Response
+     * @return Application|Factory|View|Response
      */
     public function show(string $uuid)
     {
         $post = Post::with(['tags'])->where(['uuid' => $uuid])->firstOrFail();
-        dd($post);
+        return view('posts.show', [
+            'post' => $post,
+            'link' => $post->getVimeoUrl()
+        ]);
     }
 
     /**

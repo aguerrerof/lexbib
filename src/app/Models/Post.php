@@ -33,4 +33,26 @@ class Post extends Model
         return $this->belongsToMany('App\Models\Tag', 'posts_tags', 'post_id', 'tag_id');
     }
 
+    public function getVimeoUrl(): string
+    {
+        $id = $this->getVideoId();
+        return config('vimeo.VIMEO_PLAYER_URL').'/'.$id;
+    }
+
+    /**
+     * @return mixed|string
+     * Obtained from https://gist.github.com/anjan011/1fcecdc236594e6d700f
+     */
+    private function getVideoId()
+    {
+        $regs = array();
+
+        $id = '';
+
+        if (preg_match('%^https?:\/\/(?:www\.|player\.)?vimeo.com\/(?:channels\/(?:\w+\/)?|groups\/([^\/]*)\/videos\/|album\/(\d+)\/video\/|video\/|)(\d+)(?:$|\/|\?)(?:[?]?.*)$%im', $this->link, $regs)) {
+            $id = $regs[3];
+        }
+
+        return $id;
+    }
 }

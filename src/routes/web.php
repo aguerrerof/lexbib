@@ -25,6 +25,7 @@ Route::get('/404', function () {
     return view('not_found');
 })->name('not-found');
 
+Route::get('/posts/{uuid}', [PostsController::class, 'show'])->name('posts.show');
 
 Route::prefix('admin')
     ->group(function () {
@@ -64,8 +65,6 @@ Route::prefix('admin')
             (Authenticate::class);
             Route::get('{id}/delete', [PostsController::class, 'destroy'])->name('posts.delete')->middleware
             (Authenticate::class);
-            Route::get('{uuid}/show', [PostsController::class, 'show'])->name('posts.show');
-
         });
     });
 
