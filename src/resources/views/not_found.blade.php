@@ -36,7 +36,6 @@
             <h2>No pudimos encontrar la página que estabas buscando</h2>
             <a href="{{ route("landing") }}" class="btn btn-outline-secondary" role="button"
                aria-disabled="true"><i class="bx bx-rotate-left"></i>Regresar</a>
-            <img src="assets/img/not-found.svg" class="img-fluid py-5" alt="Page Not Found">
             <div class="credits">
                 Created by <a href="https://lanistek.com" target="_blank">Lanistek</a>
             </div>

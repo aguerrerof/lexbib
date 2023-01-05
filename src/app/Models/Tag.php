@@ -24,4 +24,11 @@ class Tag extends Model
         'slug',
         'context',
     ];
+    public static function getLast(int $total)
+    {
+        return self::query()
+            ->orderBy('id')
+            ->limit($total)
+            ->get();
+    }
 }

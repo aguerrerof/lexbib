@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -27,20 +28,29 @@ class Post extends Model
         'deleted_at',
         'link',
     ];
+
     public static function search(string $q)
     {
         $query = self::query()
-            ->with('tags')->whereHas('tags', function ($query) use ($q) {
-                $query->where('title', '=', $q);
-            });
+            ->where('posts.title', 'like', "%{$q}%")
+            ->orWhere('posts.description', 'like', "%{$q}%");
         return $query->get();
     }
+
     public static function searchByTag(string $tagName)
     {
-        $query = self::with('tags')->whereHas('tags', function ($query) use ($tagName) {
+        $query = self::with('tags')->whereHas('tags', function (Builder $query) use ($tagName) {
             $query->where('title', '=', $tagName);
         });
         return $query->get();
+    }
+
+    public static function getLast(int $total)
+    {
+        return self::query()
+            ->orderBy('id')
+            ->limit($total)
+            ->get();
     }
 
     public function tags(): BelongsToMany
