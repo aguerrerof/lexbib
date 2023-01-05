@@ -27,6 +27,21 @@ class Post extends Model
         'deleted_at',
         'link',
     ];
+    public static function search(string $q)
+    {
+        $query = self::query()
+            ->with('tags')->whereHas('tags', function ($query) use ($q) {
+                $query->where('title', '=', $q);
+            });
+        return $query->get();
+    }
+    public static function searchByTag(string $tagName)
+    {
+        $query = self::with('tags')->whereHas('tags', function ($query) use ($tagName) {
+            $query->where('title', '=', $tagName);
+        });
+        return $query->get();
+    }
 
     public function tags(): BelongsToMany
     {
@@ -36,7 +51,7 @@ class Post extends Model
     public function getVimeoUrl(): string
     {
         $id = $this->getVideoId();
-        return config('vimeo.VIMEO_PLAYER_URL').'/'.$id;
+        return config('vimeo.VIMEO_PLAYER_URL') . '/' . $id;
     }
 
     /**
@@ -45,11 +60,12 @@ class Post extends Model
      */
     private function getVideoId()
     {
-        $regs = array();
+        $regs = [];
 
         $id = '';
 
-        if (preg_match('%^https?:\/\/(?:www\.|player\.)?vimeo.com\/(?:channels\/(?:\w+\/)?|groups\/([^\/]*)\/videos\/|album\/(\d+)\/video\/|video\/|)(\d+)(?:$|\/|\?)(?:[?]?.*)$%im', $this->link, $regs)) {
+        if (preg_match('%^https?:\/\/(?:www\.|player\.)?vimeo.com\/(?:channels\/(?:\w+\/)?|groups\/([^\/]*)\/videos\/|album\/(\d+)\/video\/|video\/|)(\d+)(?:$|\/|\?)(?:[?]?.*)$%im',
+            $this->link, $regs)) {
             $id = $regs[3];
         }
 

@@ -21,18 +21,56 @@
     <link href="{{ asset('assets/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
 </head>
 <body>
+<header id="header" class="header fixed-top d-flex align-items-center">
+    <div class="col-lg-4">
+    <div class="d-flex align-items-center justify-content-between">
+        <a href="{{ route("landing") }}" class="logo d-flex align-items-center">
+            <span class="d-print-none d-lg-block"> {{ config('app.name', 'Laravel') }}</span>
+        </a>
+    </div>
+    </div>
+    <div class="col-lg-8 col-xs-12 col-sm-8 col-xs-12">
+        <div class="search-bar">
+            <form class="search-form d-flex align-items-center" method="GET" action="{{ route('landing') }}">
+                <input type="text" name="q" placeholder="Buscar videos, casos y m&aacute;s" title="Enter search
+                keyword">
+                <button type="submit" title="Buscar"><i class="bi bi-search"></i></button>
+            </form>
+        </div>
+    </div>
+</header>
 <main id="main" class="main">
-    <div class="container d-flex justify-content-center">
-        <div class="input-group col-lg-12  input-group-lg">
-            <input placeholder="Buscar videos, casos y más" type="text" id="search_posts" autofocus
-                   class="form-control">
-            <div class="input-group-append">
-                <span class="input-group-text microphone"><img src="{{ asset('assets/img/search.png')
-                }}"></span>
-            </div>
+    <div class="col-lg-12">
+        <div class="row">
+            @if(isset($posts))
+                @foreach($posts as $post)
+                    <div class="col-lg-6 col-xs-12 col-sm-12 col-md-4">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <div class="embed-responsive embed-responsive-16by9">
+                                    <iframe src="{{$post->getVimeoUrl()}}" style="width: 100%"
+                                            height="360"></iframe>
+                                </div>
+                                <h5 class="card-title">{{$post->title}}</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">Subido el:&nbsp;{{$post->created_at}}</h6>
+                                <p class="card-text"><a href="{{ route("posts.show", ['uuid' => $post->uuid] )}}"
+                                class="btn btn-primary"><i class="bi
+                                                        bi-book"></i>&nbsp;Leer m&aacute;s sobre el caso</a></p>
+                            </div>
+                            <div class="card-footer">
+                                @foreach($post->tags as $tag)
+                                    <a href="{{ route("landing", ['tag' => $tag->title] )}}"
+                                       class="card-link">{{$tag->title}}</a>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            @endif
         </div>
     </div>
 </main>
+
 <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
         class="bi bi-arrow-up-short"></i></a>
 
