@@ -91,11 +91,18 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ route("me.new_password") }}">
-                    <i class="bi bi-person"></i>
-                    <span>Cambiar contrase&ntilde;a</span>
+                <a class="nav-link" href="{{ route("users.list") }}">
+                    <i class="bi bi-people"></i>
+                    <span>Usuarios</span>
                 </a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route("me.new_password") }}">
+                    <i class="bi bi-person"></i>
+                    <span>{{ __('Cambiar mi contraseña') }}</span>
+                </a>
+            </li>
+            <hr>
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('logout') }}"
                    onclick="event.preventDefault();

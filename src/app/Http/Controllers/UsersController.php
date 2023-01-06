@@ -11,6 +11,20 @@ use Illuminate\Support\Facades\Hash;
 
 class UsersController extends Controller
 {
+
+    public function index()
+    {
+        $users = User::all()
+            ->except(auth()->user()->id);
+
+        return view('users.list', ['users' => $users]);
+    }
+
+    public function create()
+    {
+        return view('users.new');
+    }
+
     /**
      * @return Application|Factory|View
      */
@@ -23,7 +37,7 @@ class UsersController extends Controller
     {
         User::find(auth()->user()->id)
             ->update(
-                ['password'=> Hash::make($request->getNewPassword())]
+                ['password' => Hash::make($request->getNewPassword())]
             );
         session()->flash('message', __('Contraseña actualizada con éxito'));
         return view('auth.change_password');

@@ -28,6 +28,18 @@ Route::get('/posts/{uuid}', [PostsController::class, 'show'])->name('posts.show'
 
 Route::prefix('admin')
     ->group(function () {
+
+        Route::prefix('users')->group(function () {
+            Route::get('',
+                [App\Http\Controllers\UsersController::class, 'index'])
+                ->name('users.list')
+                ->middleware(Authenticate::class);
+            Route::get('new',
+                [App\Http\Controllers\UsersController::class, 'create'])
+                ->name('users.new')
+                ->middleware(Authenticate::class);
+        });
+
         Route::prefix('me')->group(function () {
             Route::get('password',
                 [App\Http\Controllers\UsersController::class, 'newPassword'])
@@ -48,9 +60,9 @@ Route::prefix('admin')
             ->middleware(Authenticate::class);
 
         Auth::routes([
-            'register' => true,
+            'register' => false,
             'reset' => true,
-            'verify' => true,
+            'verify' => false,
         ]);
 
         Route::prefix('tags')->group(function () {
