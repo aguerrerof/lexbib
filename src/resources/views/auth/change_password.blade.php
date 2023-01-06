@@ -25,15 +25,18 @@
                 </ul>
             </div>
         @endif
-        <hr class="hr"/>
         <div class="row">
             <form id="new_post_form" method="POST" action="#">
                 @csrf
                 <div class="row mt-2">
-                    <div class="col-6">
+                    <div class="col-lg-6">
+
                         <div class="form-group mb-0">
                             <label for="title">Nueva Contrase&nacute;a</label>
-                            <input id="new_password" type="password" class="form-control" name="new_password" required>
+                            <div class="input-group" id="show_hide_password">
+                                <input id="new_password" type="password" class="form-control" name="new_password"
+                                       required>
+                            </div>
                         </div>
                     </div>
                     <div class="col-6">
@@ -42,6 +45,12 @@
                             <input id="new_confirm_password" type="password" class="form-control"
                                    name="new_confirm_password" required>
                         </div>
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-lg-6">
+                        <input type="checkbox" class="form-check-inline" id="show_password">
+                        {{__('Mostrar contraseña')}}
                     </div>
                 </div>
                 <hr class="hr"/>
@@ -55,4 +64,7 @@
             </form>
         </div>
     </div>
+    <script>
+
+    </script>
 @endsection
