@@ -38,6 +38,11 @@ Route::prefix('admin')
                 [App\Http\Controllers\UsersController::class, 'create'])
                 ->name('users.new')
                 ->middleware(Authenticate::class);
+
+            Route::post('save',
+                [App\Http\Controllers\UsersController::class, 'store'])
+                ->name('users.store')
+                ->middleware(Authenticate::class);
         });
 
         Route::prefix('me')->group(function () {

@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ChangePasswordRequest;
+use App\Http\Requests\CreateUserRequest;
 use App\Models\User;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Hash;
 
 class UsersController extends Controller
@@ -23,6 +25,17 @@ class UsersController extends Controller
     public function create()
     {
         return view('users.new');
+    }
+
+    public function store(CreateUserRequest $request): RedirectResponse
+    {
+        User::create([
+            'name' => $request->getName(),
+            'email' => $request->getEmail(),
+            'password' => Hash::make($request->getUserPassword()),
+            'change_password' => true
+        ]);
+        return redirect()->route('users.list');
     }
 
     /**

@@ -22,19 +22,21 @@
         @endif
         <hr class="hr"/>
         <div class="row">
-            <form id="new_post_form" method="POST" action="{{route('posts.save')}}">
+            <form id="new_post_form" method="POST" action="{{route('users.store')}}">
                 @csrf
                 <div class="row mt-2">
                     <div class="col-6">
                         <div class="form-group mb-0">
                             <label for="name">Nombre</label>
-                            <input id="name" type="text" class="form-control" name="name" required>
+                            <input id="name" type="text" class="form-control" name="name" required value="{{old('name')
+                            }}">
                         </div>
                     </div>
                     <div class="col-6">
                         <div class="form-group mb-0">
                             <label for="email">Email</label>
-                            <input id="email" type="email" class="form-control" name="email" required>
+                            <input id="email" type="email" class="form-control" name="email" required
+                                   value="{{old('email') }}">
                         </div>
                     </div>
                 </div>
@@ -44,7 +46,8 @@
                         <div class="form-group mb-0">
                             <label for="title">Contrase&nacute;a</label>
                             <div class="input-group" id="show_hide_password">
-                                <input id="new_password" type="password" class="form-control password" name="new_password"
+                                <input id="user_password" type="password" class="form-control password"
+                                       name="user_password"
                                        required>
                             </div>
                         </div>
@@ -52,8 +55,8 @@
                     <div class="col-6">
                         <div class="form-group mb-0">
                             <label for="link">Confirmar Contrase&nacute;a</label>
-                            <input id="new_confirm_password" type="password" class="form-control password"
-                                   name="new_confirm_password" required>
+                            <input id="user_confirm_password" type="password" class="form-control password"
+                                   name="user_confirm_password" required>
                         </div>
                     </div>
                 </div>
