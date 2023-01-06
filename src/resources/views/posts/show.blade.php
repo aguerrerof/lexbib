@@ -33,7 +33,7 @@
 
     <div class="d-flex align-items-center justify-content-between">
         <a href="{{ route("landing") }}" class="logo d-flex align-items-center">
-            <span class="d-none d-lg-block"> {{ config('app.name', 'Laravel') }}</span>
+            <span class="d-print-none d-lg-block"> {{ config('app.name', 'Laravel') }}</span>
         </a>
     </div><!-- End Logo -->
 

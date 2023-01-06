@@ -70,7 +70,7 @@
                                 <h5 class="card-title">{{$post->title}}</h5>
                                 <h6 class="card-subtitle mb-2 text-muted">Subido el:&nbsp;{{$post->created_at}}</h6>
                                 <p class="card-text"><a href="{{ route("posts.show", ['uuid' => $post->uuid] )}}"
-                                                        class="btn btn-primary"><i class="bi
+                                                        class="btn btn-primary stretched-link"><i class="bi
                                                         bi-book"></i>&nbsp;Leer m&aacute;s sobre el caso</a></p>
                             </div>
                             <div class="card-footer">
