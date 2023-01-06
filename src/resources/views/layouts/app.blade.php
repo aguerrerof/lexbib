@@ -91,6 +91,12 @@
                 </a>
             </li>
             <li class="nav-item">
+                <a class="nav-link" href="{{ route("me.new_password") }}">
+                    <i class="bi bi-person"></i>
+                    <span>Cambiar contrase&ntilde;a</span>
+                </a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" href="{{ route('logout') }}"
                    onclick="event.preventDefault();
                                                    document.getElementById('logout-form').submit()">

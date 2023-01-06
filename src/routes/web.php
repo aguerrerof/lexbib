@@ -28,6 +28,18 @@ Route::get('/posts/{uuid}', [PostsController::class, 'show'])->name('posts.show'
 
 Route::prefix('admin')
     ->group(function () {
+        Route::prefix('me')->group(function () {
+            Route::get('password',
+                [App\Http\Controllers\UsersController::class, 'newPassword'])
+                ->name('me.new_password')
+                ->middleware(Authenticate::class);
+
+            Route::post('password',
+                [App\Http\Controllers\UsersController::class, 'updatePassword'])
+                ->name('me.change_password')
+                ->middleware(Authenticate::class);
+        });
+
         Route::get('', function () {
             return redirect('/login');
         })->middleware(Authenticate::class);
