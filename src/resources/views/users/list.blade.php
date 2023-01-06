@@ -20,6 +20,7 @@
                         <th scope="col">Nombre</th>
                         <th scope="col">Email</th>
                         <th scope="col">Fecha de creaci&oacute;n</th>
+                        <th scope="col"></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -29,6 +30,22 @@
                             <th>{{$user->name}}</th>
                             <th scope="row">{{$user->email}}</th>
                             <th>{{$user->created_at}}</th>
+                            <th>
+                                @if(!is_null($user->deleted_at))
+                                    <a href="{{ route("users.enable", ['id' => $user->id] )}}" class="btn
+                                btn-outline-success">
+                                        <i class="fa-solid fa-toggle-on"></i>&nbsp;Activar
+                                    </a>
+                                @else
+                                    <a href="{{ route("users.disable", ['id' => $user->id] )}}" class="btn
+                                btn-outline-danger" role="button" onclick="return confirm('¿Estás seguro desactivar ' +
+                                 'este usuario?')"
+                                       aria-disabled="true">
+                                        <i class="fa-solid fa-toggle-on"></i>&nbsp;Desactivar
+                                    </a>
+                                @endif
+
+                            </th>
                         </tr>
                     @endforeach
                     </tbody>

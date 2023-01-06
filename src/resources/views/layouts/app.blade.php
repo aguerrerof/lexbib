@@ -93,7 +93,7 @@
             <li class="nav-item">
                 <a class="nav-link" href="{{ route("users.list") }}">
                     <i class="bi bi-people"></i>
-                    <span>Usuarios</span>
+                    <span>Usuarios (administradores)</span>
                 </a>
             </li>
             <li class="nav-item">

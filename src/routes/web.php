@@ -43,6 +43,16 @@ Route::prefix('admin')
                 [App\Http\Controllers\UsersController::class, 'store'])
                 ->name('users.store')
                 ->middleware(Authenticate::class);
+
+            Route::get('{id}/enable',
+                [App\Http\Controllers\UsersController::class, 'enable'])
+                ->name('users.enable')
+                ->middleware(Authenticate::class);
+
+            Route::get('{id}/disable',
+                [App\Http\Controllers\UsersController::class, 'disable'])
+                ->name('users.disable')
+                ->middleware(Authenticate::class);
         });
 
         Route::prefix('me')->group(function () {
