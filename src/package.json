@@ -7,7 +7,8 @@
         "watch-poll": "mix watch -- --watch-options-poll=1000",
         "hot": "mix watch --hot",
         "prod": "npm run production",
-        "production": "mix --production"
+        "production": "mix --production",
+        "postinstall": "npm run prod"
     },
     "devDependencies": {
         "@popperjs/core": "^2.10.2",
@@ -25,6 +26,7 @@
         "font-awesome": "^4.7.0",
         "jquery": "^3.6.1",
         "select2": "^4.1.0-rc.0",
-        "sweetalert2": "^11.6.15"
+        "sweetalert2": "^11.6.15",
+        "laravel-mix": "^6.0.6"
     }
 }
