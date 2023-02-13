@@ -29,7 +29,7 @@
 </head>
 
 <body>
-<header id="header" class="header fixed-top d-flex align-items-center">
+<header id="header" class="header d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between">
         <a href="{{ route("landing") }}" class="logo d-flex align-items-center">
@@ -40,26 +40,22 @@
 </header>
 <div class="container">
     <div class="page_title">
-        <h1>{{$post->title}}</h1>
         <nav>
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{ route("landing") }}">Home</a></li>
+                <li class="breadcrumb-item"><a href="{{ route("landing") }}">Inicio</a></li>
                 <li class="breadcrumb-item active">{{$post->title}}</li>
             </ol>
         </nav>
     </div><!-- End Page Title -->
     <div class="row">
-        <div class="col-lg-12">
+        <div class="col-lg-8 col-xs-12 col-md-8 col-xl-8 col-sm-12">
             <div class="embed-responsive embed-responsive-16by9">
                 <iframe src="{{$link}}" style="width: 100%" height="360"
                         allow="autoplay; fullscreen"
                         allowfullscreen></iframe>
             </div>
         </div>
-    </div>
-    <hr>
-    <div class="row">
-        <div class="col-lg-12">
+        <div class="col-lg-4 col-xs-12 col-md-4 col-xl-4 col-sm-12">
             <div class="card">
                 <div class="card-body">
                     <div class="accordion">
@@ -90,7 +86,7 @@
 </body>
 <footer id="footer fixed-bottom" class="footer">
     <div class="copyright">
-        &copy; Copyright <strong><span>Alexander</span></strong>. All Rights Reserved
+        &copy; Copyright <strong><span>{{ config('app.name', 'Laravel') }}</span></strong>. All Rights Reserved
     </div>
     <div class="credits">
         Created by <a href="https://lanistek.com" target="_blank">Lanistek</a>

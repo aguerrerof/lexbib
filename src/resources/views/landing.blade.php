@@ -92,7 +92,7 @@
 
 <footer id="footer fixed-bottom" class="footer">
     <div class="copyright">
-        &copy; Copyright <strong><span>Alexander</span></strong>. All Rights Reserved
+        &copy; Copyright <strong><span>{{ config('app.name', 'Laravel') }}</span></strong>. All Rights Reserved
     </div>
     <div class="credits">
         Created by <a href="https://lanistek.com" target="_blank">Lanistek</a>
