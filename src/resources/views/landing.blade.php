@@ -24,7 +24,7 @@
 
 <header id="header" class="header fixed-top d-flex align-items-center">
     <div class="d-flex align-items-center justify-content-between">
-        <a href="{{ route("landing") }}" class="logo d-flex align-items-center">
+        <a href="{{ route("landing") }}" class="logo d-flex">
             <span class="d-print-none d-lg-block"> {{ config('app.name', 'Laravel') }}</span>
         </a>
         <i class="bi bi-list toggle-sidebar-btn"></i>
@@ -41,7 +41,6 @@
     </nav>
 </header>
 <aside id="sidebar" class="sidebar">
-
     <ul class="sidebar-nav" id="sidebar-nav">
         @if(isset($tags))
             @foreach($tags as $tag)
