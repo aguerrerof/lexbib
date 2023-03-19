@@ -84,6 +84,10 @@ class LoginController extends Controller
             'deleted_at' => null
         ];
     }
+    protected function authenticated(Request $request, $user)
+    {
+        return redirect()->route('dashboard');
+    }
 
     /**
      * @param Request $request

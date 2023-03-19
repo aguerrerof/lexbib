@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\LandingController;
+use App\Http\Controllers\PodcastsController;
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\TagsController;
 use Illuminate\Auth\Middleware\Authenticate;
@@ -19,12 +20,16 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [LandingController::class, 'index'])->name('landing');
+Route::get('/about-us', function () {
+    return view('about_us');
+})->name('about_us');
 
 Route::get('/404', function () {
     return view('not_found');
 })->name('not-found');
 
 Route::get('/posts/{uuid}', [PostsController::class, 'show'])->name('posts.show');
+Route::get('/podcasts/{uuid}', [PodcastsController::class, 'show'])->name('podcasts.show');
 
 Route::prefix('admin')
     ->group(function () {
@@ -102,6 +107,18 @@ Route::prefix('admin')
             Route::post('{id}/update', [PostsController::class, 'update'])->name('posts.update')->middleware
             (Authenticate::class);
             Route::get('{id}/delete', [PostsController::class, 'destroy'])->name('posts.delete')->middleware
+            (Authenticate::class);
+        });
+
+        Route::prefix('podcasts')->group(function () {
+            Route::get('', [PodcastsController::class, 'index'])->name('podcasts.index')->middleware(Authenticate::class);
+            Route::get('new', [PodcastsController::class, 'create'])->name('podcasts.new')->middleware(Authenticate::class);
+            Route::post('save', [PodcastsController::class, 'store'])->name('podcasts.save')->middleware(Authenticate::class);
+            Route::get('{id}/edit', [PodcastsController::class, 'edit'])->name('podcasts.edit')->middleware
+            (Authenticate::class);
+            Route::post('{id}/update', [PodcastsController::class, 'update'])->name('podcasts.update')->middleware
+            (Authenticate::class);
+            Route::get('{id}/delete', [PodcastsController::class, 'destroy'])->name('podcasts.delete')->middleware
             (Authenticate::class);
         });
     });

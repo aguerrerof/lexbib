@@ -30,15 +30,36 @@
         <i class="bi bi-list toggle-sidebar-btn"></i>
 
     </div>
-    <nav class="header-nav ms-auto">
-        <div class="search-bar">
-            <form class="search-form d-flex align-items-center" method="GET" action="{{ route('landing') }}">
-                <input type="text" name="q" placeholder="Buscar videos, casos y m&aacute;s" title="Enter search
+    <div class="search-bar">
+        <div class="row">
+
+            <div class="col-lg-9 col-sm-12 col-xs-12 col-md-8">
+                <form class="search-form d-flex align-items-right" method="GET" action="{{ route('landing') }}">
+                    <input type="text" name="q" placeholder="Buscar videos, casos y m&aacute;s" title="Enter search
                 keyword" value="{{$q}}">
-                <button type="submit" title="Buscar"><i class="bi bi-search"></i></button>
-            </form>
+                    <button type="submit" title="Buscar"><i class="bi bi-search"></i></button>
+                </form>
+            </div>
+            <div class="col-lg-3 col-sm-12 col-xs-12 col-md-4">
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="showOnlyPodcasts">
+                    <label class="form-check-label" for="showOnlyPodcasts">Mostrar solo podcasts</label>
+                </div>
+            </div>
         </div>
-    </nav>
+
+    </div>
+
+    <nav class="header-nav ms-auto">
+        <ul class="d-flex align-items-center">
+
+            <li class="nav-item d-block d-lg-none">
+                <a class="nav-link nav-icon search-bar-toggle " href="#">
+                    <i class="bi bi-search"></i>
+                </a>
+            </li>
+        </ul>
+    </nav><!-- End Icons Navigation -->
 </header>
 <aside id="sidebar" class="sidebar">
     <ul class="sidebar-nav" id="sidebar-nav">
@@ -52,6 +73,13 @@
                 </li>
             @endforeach
         @endif
+        <hr>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route("about_us" )}}">
+                <i class="bi bi-info-circle"></i>
+                <span>Acerca del proyecto</span>
+            </a>
+        </li>
     </ul>
 </aside>
 <main id="main" class="main">
@@ -59,8 +87,11 @@
         <div class="row">
             @if(isset($posts))
                 @foreach($posts as $post)
-                    <div class="col-lg-6 col-xs-12 col-sm-12 col-md-12">
+                    <div data-type="posts" class="col-lg-4 col-xs-12 col-sm-12 col-md-6" style="margin-bottom: 10px;">
                         <div class="card h-100">
+                            <div class="card-header text-bg-primary text-center text-white">
+                                Video
+                            </div>
                             <div class="card-body">
                                 <div class="embed-responsive embed-responsive-36by9">
                                     <iframe src="{{$post->getVimeoUrl()}}" style="width: 100%"
@@ -72,8 +103,44 @@
                                                         class="btn btn-primary stretched-link"><i class="bi
                                                         bi-book"></i>&nbsp;Leer m&aacute;s sobre el caso</a></p>
                             </div>
-                            <div class="card-footer">
+                            <div class="card-footer text-muted">
+                                <span class="text-muted">Tags:</span>
                                 @foreach($post->tags as $tag)
+                                    <a href="{{ route("landing", ['tag' => $tag->title] )}}"
+                                       class="card-link">{{$tag->title}}</a>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            @endif
+            @if(isset($podcasts))
+                @foreach($podcasts as $podcast)
+                    <div data-type="podcasts" class="col-lg-4 col-xs-12 col-sm-12 col-md-6" style="margin-bottom:
+                    10px;">
+                        <div class="card h-100">
+                            <div class="card-header text-bg-primary text-center text-white">
+                                Podcast
+                            </div>
+                            <div class="card-body">
+                                @if(!is_null($podcast->getVimeoUrl()))
+                                    <div class="embed-responsive embed-responsive-36by9">
+                                        <iframe src="{{$podcast->getVimeoUrl()}}" style="width: 100%"
+                                                height="360"></iframe>
+                                    </div>
+                                @else
+                                    <img class="img-fluid" style=" height: 365px;" src="{{ asset
+                                    ('assets/img/product-5.jpg') }}" alt="">
+                                @endif
+                                <h5 class="card-title">{{$podcast->title}}</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">Subido el:&nbsp;{{$podcast->created_at}}</h6>
+                                <p class="card-text"><a href="{{ route("podcasts.show", ['uuid' => $podcast->uuid] )}}"
+                                                        class="btn btn-primary stretched-link"><i class="bi
+                                                        bi-mic-fill"></i>&nbsp;Escuchar m&aacute;s sobre el caso</a></p>
+                            </div>
+                            <div class="card-footer">
+                                <span class="text-muted">Tags:</span>
+                                @foreach($podcast->tags as $tag)
                                     <a href="{{ route("landing", ['tag' => $tag->title] )}}"
                                        class="card-link">{{$tag->title}}</a>
                                 @endforeach
@@ -105,6 +172,17 @@
 <script src="{{{ URL::asset('assets/vendor/simple-datatables/simple-datatables.js')}}}"></script>
 <script src="{{{ URL::asset('assets/vendor/tinymce/tinymce.min.js')}}}"></script>
 <script src="{{{ URL::asset('js/main.js')}}}"></script>
+<script>
+    $(document).ready(function () {
+        $('#showOnlyPodcasts').change(function () {
+            if (this.checked) {
+                $("div").find(`[data-type='posts']`).hide();
+            } else {
+                $("div").find(`[data-type='posts']`).show();
+            }
+        });
+    });
+</script>
 </body>
 </html>
 

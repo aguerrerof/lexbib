@@ -1,4 +1,3 @@
-alert(1);
 $("#search_posts").select2({
     tags: true,
     multiple: true,

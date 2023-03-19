@@ -131,8 +131,8 @@ class PostsController extends Controller
      */
     public function destroy(int $id)
     {
-        $tag = Post::findOrFail($id);
-        $tag->delete();
+        $post = Post::findOrFail($id);
+        $post->delete();
         return redirect()->route('posts.index');
     }
 }

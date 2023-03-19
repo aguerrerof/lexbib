@@ -91,6 +91,12 @@
                 </a>
             </li>
             <li class="nav-item">
+                <a class="nav-link" href="{{ route("podcasts.index") }}">
+                    <i class="bi bi-music-note"></i>
+                    <span>Podcasts</span>
+                </a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" href="{{ route("users.list") }}">
                     <i class="bi bi-people"></i>
                     <span>Usuarios (administradores)</span>
