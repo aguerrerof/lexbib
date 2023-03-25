@@ -7,9 +7,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use RalphJSmit\Laravel\SEO\Support\HasSEO;
 
 class Podcast extends Model
 {
+    use HasSEO;
     use HasFactory;
     use SoftDeletes;
 
@@ -23,6 +25,32 @@ class Podcast extends Model
         'link',
         'link_podcast'
     ];
+
+    public static function updateInformation(
+        int $id,
+        string $title,
+        string $description,
+        string $link,
+        ?string $linkVideo,
+        array $tags
+    ): void {
+        $podcast = Podcast::withTrashed()->findOrFail($id);
+        $podcast->update([
+            'title' => $title,
+            'description' =>$description,
+            'link' => $linkVideo,
+            'link_podcast' => $link,
+            'deleted_at' => null
+        ]);
+        $podcast->seo->update([
+            'title' => $title,
+            'description' => $description,
+        ]);
+        PodcastTag::updateTagsByPodcast(
+            $podcast,
+            $tags
+        );
+    }
 
     public static function search(string $q, int $totalPage)
     {

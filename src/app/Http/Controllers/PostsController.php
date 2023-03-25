@@ -10,6 +10,7 @@ use Cassandra\Uuid;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
@@ -77,7 +78,7 @@ class PostsController extends Controller
     public function show(string $uuid)
     {
         $post = Post::with(['tags'])->where(['uuid' => $uuid])->firstOrFail();
-        $links = \ShareButtons::page(route("posts.show", ['uuid' => $post->uuid] ), $post->title)
+        $links = \ShareButtons::page(route("posts.show", ['uuid' => $post->uuid]), $post->title)
             ->facebook()
             ->twitter()
             ->linkedin(['id' => 'linked', 'class' => 'hover', 'rel' => 'follow', 'summary' => $post->title])
@@ -113,21 +114,19 @@ class PostsController extends Controller
      *
      * @return RedirectResponse
      */
-    public function update(int $id, UpdatePostRequest $request)
+    public function update(int $id, UpdatePostRequest $request): RedirectResponse
     {
-        $post = Post::withTrashed()->findOrFail($id);
-        $post->update([
-            'title' => $request->getTitle(),
-            'description' => $request->getDescription(),
-            'link' => $request->getLink(),
-            'deleted_at' => null
-        ]);
-
-        PostTag::updateTagsByPost(
-            $post,
-            $request->getTags()
-        );
-
+        try {
+            Post::updateInformation(
+                $id,
+                $request->getTitle(),
+                $request->getDescription(),
+                $request->getLink(),
+                $request->getTags(),
+            );
+        } catch (ModelNotFoundException $e) {
+            return redirect()->route('not-found');
+        }
         return redirect()->route('posts.index');
     }
 

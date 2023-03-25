@@ -16,6 +16,8 @@
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.4",
+        "ralphjsmit/laravel-seo": "^1.2",
+        "spatie/laravel-sitemap": "^6.2",
         "vimeo/laravel": "^5.7"
     },
     "require-dev": {

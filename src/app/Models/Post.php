@@ -6,11 +6,14 @@ use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use RalphJSmit\Laravel\SEO\Support\HasSEO;
 
 class Post extends Model
 {
+    use HasSEO;
     use HasFactory;
     use SoftDeletes;
 
@@ -29,6 +32,39 @@ class Post extends Model
         'deleted_at',
         'link',
     ];
+
+    /**
+     * @param int $id
+     * @param string $title
+     * @param string $description
+     * @param string $link
+     * @param array $tags
+     * @throws ModelNotFoundException
+     * @return void
+     */
+    public static function updateInformation(
+        int $id,
+        string $title,
+        string $description,
+        string $link,
+        array $tags
+    ): void {
+        $post = self::withTrashed()->findOrFail($id);
+        $post->update([
+            'title' => $title,
+            'description' => $description,
+            'link' => $link,
+            'deleted_at' => null
+        ]);
+        $post->seo->update([
+            'title' => $title,
+            'description' => $description,
+        ]);
+        PostTag::updateTagsByPost(
+            $post,
+            $tags
+        );
+    }
 
     public static function search(string $q, int $totalPage): \Illuminate\Contracts\Pagination\Paginator
     {

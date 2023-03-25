@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row">
             <div class="alert alert-primary" role="alert">
-                Solo se pueden visualizar los posts creados por este usuario
+                Solo se pueden visualizar los podcasts creados por este usuario
             </div>
         </div>
         <div class="row">

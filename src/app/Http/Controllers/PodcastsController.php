@@ -110,22 +110,17 @@ class PodcastsController extends Controller
      * @param int $id
      * @param UpdatePodcastRequest $request
      *
-     * @return Response
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(int $id, UpdatePodcastRequest $request)
+    public function update(int $id, UpdatePodcastRequest $request): \Illuminate\Http\RedirectResponse
     {
-        $podcast = Podcast::withTrashed()->findOrFail($id);
-        $podcast->update([
-            'title' => $request->getTitle(),
-            'description' => $request->getDescription(),
-            'link' => $request->getLinkVideo(),
-            'link_podcast' => $request->getLinkPodcast(),
-            'deleted_at' => null
-        ]);
-
-        PodcastTag::updateTagsByPodcast(
-            $podcast,
-            $request->getTags()
+        Podcast::updateInformation(
+            $id,
+            $request->getTitle(),
+            $request->getDescription(),
+            $request->getLinkPodcast(),
+            $request->getLinkVideo(),
+            $request->getTags(),
         );
 
         return redirect()->route('podcasts.index');

@@ -64,6 +64,12 @@
                                 @endif
                             </div>
                         </div>
+                        <hr>
+                        <div class="col-md-8 offset-md-4">
+                            <a class="btn btn-link" href="{{ route('landing') }}">
+                                {{ __('Volver al sitio') }}
+                            </a>
+                        </div>
                     </form>
                 </div>
             </div>
