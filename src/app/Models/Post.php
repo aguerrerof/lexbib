@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -29,28 +30,20 @@ class Post extends Model
         'link',
     ];
 
-    public static function search(string $q)
+    public static function search(string $q, int $totalPage): \Illuminate\Contracts\Pagination\Paginator
     {
         $query = self::query()
             ->where('posts.title', 'like', "%{$q}%")
             ->orWhere('posts.description', 'like', "%{$q}%");
-        return $query->get();
+        return $query->paginate($totalPage);
     }
 
-    public static function searchByTag(string $tagName)
+    public static function searchByTag(string $tagName, int $totalPage): LengthAwarePaginator
     {
         $query = self::with('tags')->whereHas('tags', function (Builder $query) use ($tagName) {
             $query->where('title', '=', $tagName);
         });
-        return $query->get();
-    }
-
-    public static function getLast(int $total)
-    {
-        return self::query()
-            ->orderBy('id')
-            ->limit($total)
-            ->get();
+        return $query->paginate($totalPage);
     }
 
     public function tags(): BelongsToMany

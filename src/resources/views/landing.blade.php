@@ -87,7 +87,7 @@
         <div class="row">
             @if(isset($posts))
                 @foreach($posts as $post)
-                    <div data-type="posts" class="col-lg-4 col-xs-12 col-sm-12 col-md-6" style="margin-bottom: 10px;">
+                    <div data-type="posts" class="col-lg-3 col-xs-12 col-sm-12 col-md-6" style="margin-bottom: 10px;">
                         <div class="card h-100">
                             <div class="card-header text-bg-primary text-center text-white">
                                 Video
@@ -116,7 +116,7 @@
             @endif
             @if(isset($podcasts))
                 @foreach($podcasts as $podcast)
-                    <div data-type="podcasts" class="col-lg-4 col-xs-12 col-sm-12 col-md-6" style="margin-bottom:
+                    <div data-type="podcasts" class="col-lg-3 col-xs-12 col-sm-12 col-md-6" style="margin-bottom:
                     10px;">
                         <div class="card h-100">
                             <div class="card-header text-bg-primary text-center text-white">
@@ -149,6 +149,10 @@
                     </div>
                 @endforeach
             @endif
+        </div>
+        <hr>
+        <div class="row">
+            {{ $posts->links('vendor.pagination.default') }}
         </div>
     </div>
 </main>

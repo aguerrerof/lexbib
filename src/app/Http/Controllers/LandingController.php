@@ -13,15 +13,15 @@ class LandingController extends Controller
     {
         $posts = null;
         $podcasts = null;
-        if (
-            $request->has('q')
-            && ! is_null($request->get('q')
-            )) {
+
+        if (! is_null($request->get('q'))) {
             $posts = Post::search(
-                $request->get('q')
+                $request->get('q'),
+                5
             );
             $podcasts = Podcast::search(
-                $request->get('q')
+                $request->get('q'),
+                5
             );
             if (
                 $posts->count() < 1
@@ -30,24 +30,19 @@ class LandingController extends Controller
                 return view('not_found');
             }
         }
-        if (
-            $request->has('tag')
-            && ! is_null($request->get('tag')
-            )) {
+        if (! is_null($request->get('tag'))) {
             $posts = Post::searchByTag(
-                $request->get('tag')
+                $request->get('tag'),
+                3
             );
             $podcasts = Podcast::searchByTag(
-                $request->get('tag')
+                $request->get('tag'),
+                3
             );
         }
-        if (is_null($posts)) {
-            $posts = Post::getLast(
-                10
-            );
-            $podcasts = Podcast::getLast(
-                10
-            );
+        if (is_null($posts) && is_null($podcasts)) {
+            $posts = Post::latest()->paginate(3);
+            $podcasts = Podcast::latest()->paginate(3);
         }
         $tags = Tag::getLast(10);
 

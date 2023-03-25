@@ -24,20 +24,20 @@ class Podcast extends Model
         'link_podcast'
     ];
 
-    public static function search(string $q)
+    public static function search(string $q, int $totalPage)
     {
         $query = self::query()
             ->where('podcasts.title', 'like', "%{$q}%")
             ->orWhere('podcasts.description', 'like', "%{$q}%");
-        return $query->get();
+        return $query->paginate($totalPage);
     }
 
-    public static function searchByTag(string $tagName)
+    public static function searchByTag(string $tagName, int $totalPage)
     {
         $query = self::with('tags')->whereHas('tags', function (Builder $query) use ($tagName) {
             $query->where('title', '=', $tagName);
         });
-        return $query->get();
+        return $query->paginate($totalPage);
     }
 
     public static function getLast(int $total)
