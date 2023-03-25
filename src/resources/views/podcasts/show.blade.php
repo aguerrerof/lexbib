@@ -77,6 +77,30 @@
                         </div>
                     </div>
                 </div>
+                <div class="card-footer ">
+                    <div class="pt-4 d-flex flex-column align-items-center">
+                        <div class="social-links mt-0">
+                            <a class="btn btn-outline-info" href="{{$socialLinks['twitter']}}" target="_blank">
+                                <span><i class="bi bi-twitter"></i>&nbsp;</span><span>Twitter</span>
+                            </a>
+                            <a class="btn btn-outline-primary" href="{{$socialLinks['facebook']}}" target="_blank">
+                                <span> <i class="bi bi-facebook"></i></span>&nbsp;<span>Facebook</span>
+                            </a>
+                            <a class="btn btn-outline-primary" href="{{$socialLinks['linkedin']}}" target="_blank">
+                                <span> <i class="bi bi-linkedin"></i></span>&nbsp;<span>Linkedin</span>
+                            </a>
+                            <a class="btn btn-outline-primary" href="{{$socialLinks['telegram']}}" target="_blank">
+                                <span> <i class="bi bi-telegram"></i></span>&nbsp;<span>Telegram</span>
+                            </a>
+                            <a class="btn btn-outline-primary" href="{{$socialLinks['skype']}}" target="_blank">
+                                <span> <i class="bi bi-skype"></i></span>&nbsp;<span>Skype</span>
+                            </a>
+                            <a class="btn btn-outline-success" href="{{$socialLinks['whatsapp']}}" target="_blank">
+                                <span> <i class="bi bi-whatsapp"></i></span>&nbsp;<span>Whatsapp</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -107,6 +131,7 @@
             </ul>
         </div>
     @endif
+
 </div>
 
 

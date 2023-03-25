@@ -69,15 +69,25 @@ class PodcastsController extends Controller
      *
      * @param string $uuid
      *
-     * @return Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|Response
      */
     public function show(string $uuid)
     {
         $podcast = Podcast::with(['tags'])->where(['uuid' => $uuid])->firstOrFail();
+        $links = \ShareButtons::page(route("podcasts.show", ['uuid' => $podcast->uuid] ), $podcast->title)
+            ->facebook()
+            ->twitter()
+            ->linkedin(['id' => 'linked', 'class' => 'hover', 'rel' => 'follow', 'summary' => $podcast->title])
+            ->telegram()
+            ->skype()
+            ->whatsapp()
+            ->getRawLinks();
+
         return view('podcasts.show', [
             'podcast' => $podcast,
             'tags' => $podcast->tags()->get(),
-            'link' => (!is_null($podcast->link) && !empty($podcast->link))? $podcast->getVimeoUrl() : null,
+            'socialLinks' => $links,
+            'link' => (! is_null($podcast->link) && ! empty($podcast->link)) ? $podcast->getVimeoUrl() : null,
         ]);
     }
 

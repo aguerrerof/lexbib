@@ -77,8 +77,17 @@ class PostsController extends Controller
     public function show(string $uuid)
     {
         $post = Post::with(['tags'])->where(['uuid' => $uuid])->firstOrFail();
+        $links = \ShareButtons::page(route("posts.show", ['uuid' => $post->uuid] ), $post->title)
+            ->facebook()
+            ->twitter()
+            ->linkedin(['id' => 'linked', 'class' => 'hover', 'rel' => 'follow', 'summary' => $post->title])
+            ->telegram()
+            ->skype()
+            ->whatsapp()
+            ->getRawLinks();
         return view('posts.show', [
             'post' => $post,
+            'socialLinks' => $links,
             'link' => $post->getVimeoUrl()
         ]);
     }

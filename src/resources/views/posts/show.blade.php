@@ -48,14 +48,14 @@
         </nav>
     </div><!-- End Page Title -->
     <div class="row">
-        <div class="col-lg-8 col-xs-12 col-md-8 col-xl-8 col-sm-12">
+        <div class="col-lg-12 col-xs-12 col-md-8 col-xl-12 col-sm-12">
             <div class="embed-responsive embed-responsive-16by9">
                 <iframe src="{{$link}}" style="width: 100%" height="360"
                         allow="autoplay; fullscreen"
                         allowfullscreen></iframe>
             </div>
         </div>
-        <div class="col-lg-4 col-xs-12 col-md-4 col-xl-4 col-sm-12">
+        <div class="col-lg-12 col-xs-12 col-md-4 col-xl-12 col-sm-12">
             <div class="card">
                 <div class="card-body">
                     <div class="accordion">
@@ -72,6 +72,30 @@
                                     {{$post->description}}
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer ">
+                    <div class="pt-4 d-flex flex-column align-items-center">
+                        <div class="social-links mt-0">
+                            <a class="btn btn-outline-info" href="{{$socialLinks['twitter']}}" target="_blank">
+                                <span><i class="bi bi-twitter"></i>&nbsp;</span><span>Twitter</span>
+                            </a>
+                            <a class="btn btn-outline-primary" href="{{$socialLinks['facebook']}}" target="_blank">
+                                <span> <i class="bi bi-facebook"></i></span>&nbsp;<span>Facebook</span>
+                            </a>
+                            <a class="btn btn-outline-primary" href="{{$socialLinks['linkedin']}}" target="_blank">
+                                <span> <i class="bi bi-linkedin"></i></span>&nbsp;<span>Linkedin</span>
+                            </a>
+                            <a class="btn btn-outline-primary" href="{{$socialLinks['telegram']}}" target="_blank">
+                                <span> <i class="bi bi-telegram"></i></span>&nbsp;<span>Telegram</span>
+                            </a>
+                            <a class="btn btn-outline-primary" href="{{$socialLinks['skype']}}" target="_blank">
+                                <span> <i class="bi bi-skype"></i></span>&nbsp;<span>Skype</span>
+                            </a>
+                            <a class="btn btn-outline-success" href="{{$socialLinks['whatsapp']}}" target="_blank">
+                                <span> <i class="bi bi-whatsapp"></i></span>&nbsp;<span>Whatsapp</span>
+                            </a>
                         </div>
                     </div>
                 </div>
