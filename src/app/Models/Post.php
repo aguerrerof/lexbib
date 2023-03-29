@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Carbon;
 use RalphJSmit\Laravel\SEO\Support\HasSEO;
 
 class Post extends Model
@@ -33,12 +34,18 @@ class Post extends Model
         'link',
     ];
 
+    public function getCreatedAtAttribute($value): string
+    {
+        return Carbon::parse($value)->format('Y-m-d');
+    }
+
     /**
      * @param int $id
      * @param string $title
      * @param string $description
      * @param string $link
      * @param array $tags
+     *
      * @throws ModelNotFoundException
      * @return void
      */

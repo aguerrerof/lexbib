@@ -2,11 +2,13 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Carbon;
 use RalphJSmit\Laravel\SEO\Support\HasSEO;
 
 class Podcast extends Model
@@ -26,6 +28,11 @@ class Podcast extends Model
         'link_podcast'
     ];
 
+    public function getCreatedAtAttribute($value): string
+    {
+        return Carbon::parse($value)->format('Y-m-d');
+    }
+
     public static function updateInformation(
         int $id,
         string $title,
@@ -37,7 +44,7 @@ class Podcast extends Model
         $podcast = Podcast::withTrashed()->findOrFail($id);
         $podcast->update([
             'title' => $title,
-            'description' =>$description,
+            'description' => $description,
             'link' => $linkVideo,
             'link_podcast' => $link,
             'deleted_at' => null
