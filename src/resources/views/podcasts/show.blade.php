@@ -28,6 +28,7 @@
     <link href="{{ asset('assets/vendor/quill/quill.bubble.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/vendor/remixicon/remixicon.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/vendor/simple-datatables/style.css') }}" rel="stylesheet">
+
 </head>
 
 <body>
@@ -166,4 +167,5 @@
 <script src="{{{ URL::asset('assets/vendor/simple-datatables/simple-datatables.js')}}}"></script>
 <script src="{{{ URL::asset('assets/vendor/tinymce/tinymce.min.js')}}}"></script>
 <script src="{{{ URL::asset('js/main.js')}}}"></script>
+@include('google_analytics')
 </html>

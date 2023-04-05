@@ -125,4 +125,6 @@
 <script src="{{{ URL::asset('assets/vendor/simple-datatables/simple-datatables.js')}}}"></script>
 <script src="{{{ URL::asset('assets/vendor/tinymce/tinymce.min.js')}}}"></script>
 <script src="{{{ URL::asset('js/main.js')}}}"></script>
+@include('google_analytics')
+
 </html>

@@ -187,6 +187,7 @@
         });
     });
 </script>
+@include('google_analytics')
 </body>
 </html>
 
