@@ -46,7 +46,7 @@ class LandingController extends Controller
         }
         $tags = Tag::getLast(10);
 
-        return view('landing', [
+        return view('landing.index', [
             'posts' => $posts,
             'podcasts' => $podcasts,
             'tags' => $tags,

@@ -86,7 +86,7 @@ class PostsController extends Controller
             ->skype()
             ->whatsapp()
             ->getRawLinks();
-        return view('posts.show', [
+        return view('landing.show_post', [
             'post' => $post,
             'socialLinks' => $links,
             'link' => $post->getVimeoUrl()

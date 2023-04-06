@@ -83,7 +83,7 @@ class PodcastsController extends Controller
             ->whatsapp()
             ->getRawLinks();
 
-        return view('podcasts.show', [
+        return view('landing.show_podcast', [
             'podcast' => $podcast,
             'tags' => $podcast->tags()->get(),
             'socialLinks' => $links,

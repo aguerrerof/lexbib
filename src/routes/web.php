@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [LandingController::class, 'index'])->name('landing');
 Route::get('/about-us', function () {
-    return view('about_us');
+    return view('landing.about_us');
 })->name('about_us');
 
 Route::get('/404', function () {
