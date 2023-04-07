@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Carbon;
 use RalphJSmit\Laravel\SEO\Support\HasSEO;
@@ -86,6 +87,11 @@ class Podcast extends Model
     public function tags(): BelongsToMany
     {
         return $this->belongsToMany('App\Models\Tag', 'podcasts_tags', 'podcast_id', 'tag_id');
+    }
+
+    public function user(): HasOne
+    {
+        return $this->hasOne('App\Models\User', 'id', 'user_id');
     }
 
     public function getVimeoUrl(): ?string

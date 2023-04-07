@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthorsController;
 use App\Http\Controllers\LandingController;
 use App\Http\Controllers\PodcastsController;
 use App\Http\Controllers\PostsController;
@@ -30,6 +31,7 @@ Route::get('/404', function () {
 
 Route::get('/posts/{uuid}', [PostsController::class, 'show'])->name('posts.show');
 Route::get('/podcasts/{uuid}', [PodcastsController::class, 'show'])->name('podcasts.show');
+Route::get('/authors/{uuid}', [AuthorsController::class, 'show'])->name('author.show');
 
 Route::prefix('admin')
     ->group(function () {

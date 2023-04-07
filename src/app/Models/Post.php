@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Carbon;
 use RalphJSmit\Laravel\SEO\Support\HasSEO;
@@ -71,6 +72,10 @@ class Post extends Model
             $post,
             $tags
         );
+    }
+    public function user(): HasOne
+    {
+        return $this->hasOne('App\Models\User', 'id', 'user_id');
     }
 
     public static function search(string $q, int $totalPage): \Illuminate\Contracts\Pagination\Paginator

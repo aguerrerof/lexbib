@@ -73,7 +73,7 @@ class PodcastsController extends Controller
      */
     public function show(string $uuid)
     {
-        $podcast = Podcast::with(['tags'])->where(['uuid' => $uuid])->firstOrFail();
+        $podcast = Podcast::with(['tags','user','user.author'])->where(['uuid' => $uuid])->firstOrFail();
         $links = \ShareButtons::page(route("podcasts.show", ['uuid' => $podcast->uuid] ), $podcast->title)
             ->facebook()
             ->twitter()

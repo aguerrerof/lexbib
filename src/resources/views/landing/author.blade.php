@@ -20,15 +20,7 @@
 <body>
 @include('landing.header')
 <div class="container px-4 px-lg-5">
-    <div class="row">
-        <div class="form-outline">
-            <form class="d-flex align-items-right" method="GET" action="{{ route('landing') }}">
-                <input type="text" id="q" name="q" class="form-control" placeholder="Buscar videos, casos y m&aacute;s"
-                       aria-label="Search" value="{{$q}}"/>
-                <button type="submit" class="btn btn-primary" title="Buscar"><i class="fas fa-search"></i></button>
-            </form>
-        </div>
-    </div>
+    @include('landing.author_widget',['author'=>$author])
     <hr class="my-4"/>
     <div class="row gx-4 gx-lg-12 justify-content-center">
         <div class="col-lg-12">

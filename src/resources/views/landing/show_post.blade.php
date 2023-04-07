@@ -18,7 +18,7 @@
     <link href="{{{ URL::asset('landing/css/styles.css')}}}" rel="stylesheet"/>
 </head>
 <body>
-@include('landing.header');
+@include('landing.header')
 <div class="container px-4 px-lg-5">
     <div class="row">
         <div class="form-outline">
@@ -57,32 +57,13 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="card-footer ">
-                    <div class="pt-4 d-flex flex-column align-items-center">
-                        <div class="social-links mt-0">
-                            <a class="btn btn-outline-info" href="{{$socialLinks['twitter']}}" target="_blank">
-                                <span><i class="fa-brands fa-twitter"></i>&nbsp;</span><span>Twitter</span>
-                            </a>
-                            <a class="btn btn-outline-primary" href="{{$socialLinks['facebook']}}" target="_blank">
-                                <span><i class="fa-brands fa-facebook"></i>&nbsp;</span><span>Facebook</span>
-                            </a>
-                            <a class="btn btn-outline-primary" href="{{$socialLinks['linkedin']}}" target="_blank">
-                                <span> <i class="fa-brands fa-linkedin"></i></span>&nbsp;<span>Linkedin</span>
-                            </a>
-                            <a class="btn btn-outline-primary" href="{{$socialLinks['telegram']}}" target="_blank">
-                                <span> <i class="fa-brands fa-telegram"></i></span>&nbsp;<span>Telegram</span>
-                            </a>
-                            <a class="btn btn-outline-primary" href="{{$socialLinks['skype']}}" target="_blank">
-                                <span> <i class="fa-brands fa-skype"></i></span>&nbsp;<span>Skype</span>
-                            </a>
-                            <a class="btn btn-outline-success" href="{{$socialLinks['whatsapp']}}" target="_blank">
-                                <span> <i class="fa-brands fa-whatsapp"></i></span>&nbsp;<span>Whatsapp</span>
-                            </a>
-                        </div>
-                    </div>
+                    <hr class="my-4"/>
+                    @include('landing.social_links',['socialLinks'=>$socialLinks])
                 </div>
             </div>
+            @if(!is_null($post->user->author))
+                @include('landing.author_widget',['author'=>$post->user->author])
+            @endif
         </div>
     </div>
     @if(isset($tags))
